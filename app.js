@@ -32,11 +32,25 @@ exports.genShortUrl = function(req, res) {
   
   ShortUrl.findOne({ url: url }, function(err, sUrl) {
     if(err) {
-      console.log(err);
-      res.json({ error: err, at: "check for existing short-url for given url" });
+      console.log({ err: err, at: "check-for-duplicate" });
+      res.json({ error: err, at: "check-for-duplicate" });
       return;
     }
-    if(!s)
+    if(sUrl) {
+      res.json({ original_url: url, short_url: sUrl.slug });
+    } else {
+      console.log("gen new short-url");
+      Counter.findOneAndUpdate({}, { $inc: { count: 1 } }, { new: true, upsert: true }, function(err, doc) {
+        const slug = doc.slug;
+        if(err || !slug) {
+          console.log({ err: err, at: "failed-to-gen-slug", slug: slug });
+          res.json({ error: err, at: "gen-slug" });
+          return;
+        }
+        const newShortUrl = new ShortUrl({ url: url, slug: slug });
+        newShortUrl.
+      });
+    }
   })
 }
 
