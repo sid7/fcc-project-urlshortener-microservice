@@ -18,7 +18,7 @@ function isValidURL(url) {
 }
 
 exports.genShortUrl = function(req, res) {
-  if(!req.body.slug) {
+  if(!req.body.url) {
     res.json({ error: "No URL Found" });
     return;
   }
@@ -41,9 +41,9 @@ exports.genShortUrl = function(req, res) {
     } else {
       console.log("gen new short-url");
       Counter.findOneAndUpdate({}, { $inc: { count: 1 } }, { new: true, upsert: true }, function(err, doc) {
-        const slug = doc.slug;
+        const slug = doc.count;
         if(err || !slug) {
-          console.log({ err: err, at: "failed-to-gen-slug", slug: slug });
+          console.log({ err: err, at: "failed-to-gen-slug", doc: doc });
           res.json({ error: err, at: "gen-slug" });
           return;
         }
