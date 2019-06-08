@@ -36,8 +36,8 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
-app.post("/api/shorturl/:slug", myApp.genShortUrl);
-app.get("/api/shorturl/new", myApp.redirectToOriginalUrl);
+app.post("/api/shorturl/new", myApp.genShortUrl);
+app.get("/api/shorturl/:slug", myApp.redirectToOriginalUrl);
 
 app.listen(port, function () {
   console.log('Node.js listening ...');
