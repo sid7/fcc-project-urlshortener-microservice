@@ -16,6 +16,7 @@ var port = process.env.PORT || 3000;
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useFindAndModify: false }, function(err) {
   console.log(err || "db connected");
 });
+var myApp = require("./app.js");
 
 app.use(cors());
 

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const ShortUrl = new mongoose.Scheme({
+const ShortUrl = new mongoose.Schema({
   url: {
     type: String,
     required: true

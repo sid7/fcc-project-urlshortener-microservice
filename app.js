@@ -48,12 +48,33 @@ exports.genShortUrl = function(req, res) {
           return;
         }
         const newShortUrl = new ShortUrl({ url: url, slug: slug });
-        newShortUrl.
+        newShortUrl.save(function(err) {
+          if(err) {
+            res.json({ error: err, at: "saving-new-short-url" });
+          } else {
+            res.json({ original_url: url, short_url: slug  });
+          }
+        })
       });
     }
   })
 }
 
 exports.redirectToOriginalUrl = function(req, res) {
-  
+  const slug = req.params.slug;
+  if(!Number(slug)) {
+    res.json({ error: "Wrong Format" });
+    return;
+  }
+  ShortUrl.findOne({ slug: slug }, function(err, doc) {
+    if(err) {
+      res.json({ error: err, at: "finding URL in db" });
+      return;
+    }
+    if(doc) {
+      res.redirect(doc.url);
+    } else {
+      res.json({ error: "No URL Found" });
+    }
+  })
 }
