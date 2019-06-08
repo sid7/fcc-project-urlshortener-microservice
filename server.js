@@ -13,8 +13,8 @@ var bodyParser = require("body-parser");
 var port = process.env.PORT || 3000;
 
 /** this project needs a db !! **/ 
-mongoose.connect(process.env.MONGOLAB_URL, { useNewUrlParser: true, useFindAndModify: false }, function(err) {
-  console.log(err || "dconnected");
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useFindAndModify: false }, function(err) {
+  console.log(err || "db connected");
 });
 
 app.use(cors());
