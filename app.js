@@ -9,11 +9,10 @@ function sanitizeURL(url) {
   return url;
 }
 function isValidURL(url) {
-  try {
-    url = new URL(url);
-  } catch(err) {
+  if(!/^https?:/.test(url)) {
     return false;
-  }
+  } else if(/\//.test()) {}
+  
   return true;
 }
 
