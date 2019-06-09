@@ -19,7 +19,7 @@ h3 {
 }
 
 .footer {
-	margin-top: 40px;
+	margin-top: 30px;
 }
 
 .user-stories {
@@ -73,6 +73,13 @@ input[type=text] {
   text-align: center;
 }
 
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
 table {
   margin: 0 auto;
   border: 2px solid;
@@ -88,4 +95,13 @@ td {
   text-align: left;
   border-top: 1px solid;
   border-bottom: 1px solid;
+}
+
+tr td:first-child,
+tr th:first-child {
+  border-right: 1px solid;
+}
+tr td:last-child,
+tr th:last-child {
+  border-left: 1px solid;
 }
