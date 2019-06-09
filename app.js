@@ -1,4 +1,5 @@
 const url = require("url").URL;
+const dns = require("dns");
 const Counter = require("./models/counter.js");
 const ShortUrl = require("./models/short-url.js");
 
@@ -8,12 +9,15 @@ function sanitizeURL(url) {
   }
   return url;
 }
-function isValidURL(url) {
-  if(!/^https?:/.test(url)) {
+function isValidURL(url, cb) {
+  try {
+    url = new URL(url);
+  } catch(err) {
     return false;
-  } else if(/\//.test()) {}
-  
-  return true;
+  }
+  dns.lookup(url.hostname, function(err) {
+    cb(err ? false : true);
+  });
 }
 
 exports.genShortUrl = function(req, res) {
@@ -28,6 +32,7 @@ exports.genShortUrl = function(req, res) {
     res.json({ error: "Invalid URL" });
     return;
   }
+  
   
   ShortUrl.findOne({ url: url }, function(err, sUrl) {
     if(err) {
