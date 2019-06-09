@@ -77,9 +77,15 @@ table {
   margin: 0 auto;
   border: 2px solid;
   border-radius: 5px;
+  border-collapse: collapse;
+}
+
+th, td {
   padding: 5px 15px;
 }
 
-thead {
-  border-bottom:
+td {
+  text-align: left;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
 }
