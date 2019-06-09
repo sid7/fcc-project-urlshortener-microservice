@@ -16,7 +16,6 @@ function checkURL(url, cb) {
     return false;
   }
   dns.lookup(url.hostname, function(err) {
-    console.log(arguments);
     cb(err ? false : true);
   });
 }

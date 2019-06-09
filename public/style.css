@@ -72,3 +72,14 @@ input[type=text] {
   width: 220px;
   text-align: center;
 }
+
+table {
+  margin: 0 auto;
+  border: 2px solid;
+  border-radius: 5px;
+  padding: 5px 15px;
+}
+
+thead {
+  border-bottom:
+}
